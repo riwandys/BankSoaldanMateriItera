@@ -1,14 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('user_model');
+        $this->load->model('prodi_model');
     }
 
-    public function index()
-    {
+    public function index() {
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 
@@ -20,15 +21,14 @@ class Auth extends CI_Controller {
         }
     }
 
-    private function _login()
-    {
+    private function _login() {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('user', ['username' => $username])->row_array();
+        $user = $this->user_model->get_user($username);
         if ($user) {
             if (password_verify($password, $user['password'])) {
-                $prodi = $this->db->get_where('program_studi', ['kode_prodi' => $user['kode_prodi']])->row_array();
+                $prodi = $this->prodi_model->get_prodi($user['kode_prodi']);
                 $data = [
                     'username' => $user['username'],
                     'role' => $user['role'],
@@ -42,14 +42,30 @@ class Auth extends CI_Controller {
                     redirect('operator');
                 }
             } else {
-                $this->session->set_flashdata('message',
-                '<div class="alert alert-danger" role="alert">
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class="alert alert-danger" role="alert">
                     Wrong password!
-                </div>');
+                </div>'
+                );
                 redirect('auth');
             }
         } else {
-            
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger" role="alert">
+                Username not found
+            </div>'
+            );
+            redirect('auth');
         }
+    }
+
+    public function logout() {
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('role');
+        $this->session->unset_userdata('kode_prodi');
+        $this->session->unset_userdata('nama_prodi');
+        redirect('auth');
     }
 }

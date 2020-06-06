@@ -50,5 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
+$route['admin/matakuliah/:any/materi'] = 'admin/list_materi/$1';
+$route['admin/matakuliah/:any/soal'] = 'admin/list_soal/$1';
+$route['admin/matakuliah/:any/video'] = 'admin/list_video/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
