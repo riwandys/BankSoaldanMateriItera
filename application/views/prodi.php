@@ -1,7 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 id="jtik" class="h3 mb-4 text-gray-800"><?= $prodi['nama_prodi'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800"><?= $prodi['nama_prodi'] ?></h1>
     <div class="row">
         <?php foreach ($list_mata_kuliah as $mata_kuliah) { ?>
             <div class="col-xl-3 col-md-4 col-sm-6 col-6 mb-4">
