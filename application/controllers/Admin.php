@@ -53,7 +53,6 @@ class Admin extends CI_Controller {
     }
 
     public function list_materi($kode_mata_kuliah) {
-        
         $data['user'] = $this->session->userdata();
         $data['mata_kuliah'] = $this->matakuliah_model->get_matakuliah($kode_mata_kuliah);
         $data['list_materi'] = $this->konten_model->get_materi_by_matakuliah($kode_mata_kuliah);
@@ -64,4 +63,28 @@ class Admin extends CI_Controller {
         $this->load->view('materi');
         $this->load->view('templates/footer');
     }
+    
+    public function add_materi($kode_mata_kuliah) {
+        $data['user'] = $this->session->userdata();
+        $data['mata_kuliah'] = $this->matakuliah_model->get_matakuliah($kode_mata_kuliah);
+        $data['title'] = 'Tambah Materi '.$data['mata_kuliah']['nama_mata_kuliah'].' - BSMI';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('upload_materi');
+        $this->load->view('templates/footer');
+    }
+
+    public function list_soal($kode_mata_kuliah) {
+        $data['user'] = $this->session->userdata();
+        $data['mata_kuliah'] = $this->matakuliah_model->get_matakuliah($kode_mata_kuliah);
+        $data['list_soal'] = $this->konten_model->get_soal_by_matakuliah($kode_mata_kuliah);
+        $data['title'] = 'soal '.$data['mata_kuliah']['nama_mata_kuliah'].' - BSMI';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('soal');
+        $this->load->view('templates/footer');
+    }
+
 }

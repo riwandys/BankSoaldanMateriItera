@@ -3,22 +3,6 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Materi <?= $mata_kuliah['nama_mata_kuliah']; ?></h1>
 
-    <div class="row">
-        <div class="col-12">
-            <a href="<?= base_url('admin/matakuliah/'.$mata_kuliah['kode_mata_kuliah'].'/materi/add'); ?>" class="btn btn-primary btn-icon-split btn-sm mr-2 mb-4">
-                <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span class="text">Tambah</span>
-            </a>
-            <a href="#" class="btn btn-danger btn-icon-split btn-sm mb-4">
-                <span class="icon text-white-50">
-                    <i class="fas fa-trash"></i>
-                </span>
-                <span class="text">Hapus</span>
-            </a>
-        </div>
-    </div>
 
     <div class="row">
         <?php foreach ($list_materi as $materi) { ?>
@@ -33,6 +17,23 @@
                 </a>
             </div>
         <?php } ?>
+    </div>
+
+    <div class="row">
+        <div class="col-12 float-r">
+            <a href="<?= base_url('admin/matakuliah/' . $mata_kuliah['kode_mata_kuliah'] . '/materi/add'); ?>" class="btn btn-primary btn-icon-split btn-sm mr-2 mb-4">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Simpan</span>
+            </a>
+            <a href="#" class="btn btn-danger btn-icon-split btn-sm mb-4">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+                <span class="text">Batal</span>
+            </a>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
