@@ -18,5 +18,14 @@ class Konten_model extends CI_Model {
         $this->db->order_by('judul_soal','ASC');
         return $this->db->get_where('file_soal', ['kode_mata_kuliah'=>$kode_mata_kuliah])->result_array();
     }
+
+    public function get_video($id_video) {
+        return $this->db->get_where('video_referensi', ['kode_soal' => $id_video])->row_array();
+    }
+
+    public function get_video_by_matakuliah($kode_mata_kuliah) {
+        $this->db->order_by('judul_video','ASC');
+        return $this->db->get_where('video_referensi', ['kode_mata_kuliah'=>$kode_mata_kuliah])->result_array();
+    }
 }
 ?>
